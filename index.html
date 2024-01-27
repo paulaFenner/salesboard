@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+
+    <title>Salesboard</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <section class="header-container">
+        <h1>Salesboard 🔔</h1>
+        <img class="profile-picture" src="/assets/Ollie.png" alt="portrait of a person with short blue hair, wearing a black top" />
+      </section>
+
+      <section class="products-container">
+        <button id="product-a-btn">⭐</button>
+        <button id="product-b-btn">🔥</button>
+      </section>
+
+      <section class="statistics-container">
+        <div>
+          <h2>Live Sales - <span id="sales-count"></span></h2>
+          <div class="display big-display" id="display-sales"></div>
+        </div>
+        <div>
+          <h2>Live Achievements - <span id="achievements-count"></span></h2>
+          <div class="display big-display" id="display-achievements"></div>
+        </div>
+      </section>
+
+      <section class="totals-container">
+        <div>
+          <h2>Total Revenue</h2>
+          <div class="display small-display" id="total-revenue"></div>
+        </div>
+        <div>
+          <h2>Total Commision</h2>
+          <div class="display small-display" id="total-commision"></div>
+        </div>
+      </section>
+
+      <section class="reset-container">
+        <button class="reset-btn" id="reset-btn">RESET</button>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

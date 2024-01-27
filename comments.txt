@@ -1,0 +1,33 @@
+//*** EVENTS LISTENERS ***//
+// 1 
+Event listener for the click on product A  or B buttons
+Call the handleProduct function with the productA or productB object
+If new products would be added, each one would need a new event listener,
+but the function would be the same.
+
+// 2
+Event listener for the click on the RESET button
+Calls the function that clear all the displays and counts.
+
+
+//*** FUNCTIONS ***//
+// 1
+handleProduct(product) Name of function and parameter
+sales.push(product.emoji); - pushes the emoji to the sales array
+totalRevenue += product.revenue; - adds the product amount to the total revenue
+totalCommision += product.commision; - adds the product commision to the total commision
+
+// 2
+renders the sales to displaySales IF the quantity of sales is below
+the maxDisplayLimit, when the sales are above that limit it triggers an alert!
+.join('') - this method was added to remove the comma between the items rendered.
+
+// 3
+Achievements
+🔔: When user gets first sale = sales.length === 1
+💰: When user exceeds $ 2500 in revenue = totalRevenue >= 2500
+🏆: When user gets 15 sales = sales.length === 15
+
+// 4
+function that clears ALL the displays and counts. 
+Brings everything back to 0 or empty
