@@ -72,7 +72,7 @@ function renderSales() {
   if (sales.length < maxDisplayLimit) {
     displaySales.innerText = sales.join('');
   } else {
-    alert("Well done, you've done your part! Captalists are happy with you.");
+    alert("Go home, you've done your part! Captalists are happy with you.");
   }
 }
 
@@ -128,4 +128,24 @@ function resetAll() {
 
   totalRevenue = 0;
   totalCommision = 0;
+}
+
+// LIGHT MODE TOGGLE SWITCH
+const toggleSwitchEl = document.getElementById('toggle-switch');
+const mainElement = document.querySelector('main');
+
+toggleSwitchEl.addEventListener('change', function (e) {
+  if (e.target.checked) {
+    enableLightMode();
+  } else {
+    enableDarkMode();
+  }
+});
+
+function enableLightMode() {
+  mainElement.classList.add('light-mode');
+}
+
+function enableDarkMode() {
+  mainElement.classList.remove('light-mode');
 }
