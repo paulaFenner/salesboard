@@ -1,151 +1,101 @@
-// PRODUCTS INFO
-const productA = {
-  emoji: '⭐',
-  revenue: 200,
-  commision: 50,
-};
+import { productA, productB } from './data.js';
+import { toggleOp } from './toggle-switch.js';
 
-const productB = {
-  emoji: '🔥',
-  revenue: 300,
-  commision: 75,
-};
-
-// DOM elements
-const productAEl = document.getElementById('product-a-btn');
-const productBEl = document.getElementById('product-b-btn');
-
-const salesCountEl = document.getElementById('sales-count');
-const achievementsCountEl = document.getElementById('achievements-count');
-
-const displaySales = document.getElementById('display-sales');
-const displayAchievements = document.getElementById('display-achievements');
-
-const totalRevenueEl = document.getElementById('total-revenue');
-const totalCommisionEl = document.getElementById('total-commision');
-
-const resetBtn = document.getElementById('reset-btn');
-
-// VARIABLES
-const maxDisplayLimit = 20; // Set desired display limit
-
+// State Variables
 let sales = [];
 let achievements = [];
-
-let totalRevenue = 0;
-let totalCommision = 0;
-
+let revenue = 0;
+let commission = 0;
 let missingMoneyAchievement = true;
 
-//*** EVENTS LISTENERS ***//
-// 1
-productAEl.addEventListener('click', function () {
-  handleProduct(productA);
+// DOM Elements
+const productBtnEls = document.querySelectorAll('.product');
+const resetBtnEl = document.getElementById('reset-btn');
+
+// Event Listeners
+productBtnEls.forEach((productBtnEl) => {
+  productBtnEl.addEventListener('click', handleSalesTransactions);
 });
 
-productBEl.addEventListener('click', function () {
-  handleProduct(productB);
-});
+resetBtnEl.addEventListener('click', resetSales);
 
-// 2
-resetBtn.addEventListener('click', function () {
-  resetAll();
-});
-
-//*** FUNCTIONS ***//
-// 1
-function handleProduct(product) {
-  sales.push(product.emoji);
-  totalRevenue += product.revenue;
-  totalCommision += product.commision;
-  renderSales();
-  salesCount();
-  addAchievements();
-  renderAchievements();
-  achievementsCount();
-  renderRevenue();
-  renderCommision();
+// Utility Functions
+function getProductById(id) {
+  if (id === 'prod-a') {
+    return productA;
+  } else if (id === 'prod-b') {
+    return productB;
+  }
+  return null;
 }
 
-// 2
-function renderSales() {
-  if (sales.length < maxDisplayLimit) {
-    displaySales.innerText = sales.join('');
-  } else {
-    alert("Go home, you've done your part! Captalists are happy with you.");
+// Main Functions
+function handleSalesTransactions(e) {
+  appendLiveSales(e);
+  limitOfSales();
+  appendLiveAchievements();
+  updateRevenueAndCommission();
+}
+
+function appendLiveSales(e) {
+  const product = getProductById(e.target.id);
+  if (product) {
+    sales.push(product.emoji);
+    revenue += product.revenue;
+    commission += product.commission;
+    updateSalesDisplayAndCount();
   }
 }
 
-function salesCount() {
-  salesCountEl.textContent = sales.length;
-}
-
-function renderRevenue() {
-  totalRevenueEl.textContent = ` 
-   $ ${totalRevenue} 
-   `;
-}
-
-function renderCommision() {
-  totalCommisionEl.textContent = ` 
-   $ ${totalCommision} 
-   `;
-}
-
-// 3
-function addAchievements() {
+function appendLiveAchievements() {
   if (sales.length === 1) {
     achievements.push('🔔');
   } else if (sales.length === 15) {
     achievements.push('🏆');
-  } else if (totalRevenue >= 2500 && missingMoneyAchievement) {
+  } else if (revenue >= 2500 && missingMoneyAchievement) {
     achievements.push('💰');
     missingMoneyAchievement = false;
   }
+  updateAchievemnetsDisplayAndCount();
 }
 
-function renderAchievements() {
-  displayAchievements.innerText = achievements.join('');
+function resetSales() {
+  sales = [];
+  achievements = [];
+  revenue = 0;
+  commission = 0;
+  missingMoneyAchievement = true;
+  updateSalesDisplayAndCount();
+  updateAchievemnetsDisplayAndCount();
+  updateRevenueAndCommission();
 }
 
-function achievementsCount() {
+function limitOfSales() {
+  const maxSales = 15;
+  if (sales.length > maxSales) {
+    alert(`You have reached the maximum limit of ${maxSales} sales.`);
+  }
+}
+
+// Update Functions
+function updateSalesDisplayAndCount() {
+  const displaySalesEl = document.getElementById('display-sales');
+  const salesCountEl = document.getElementById('sales-count');
+  displaySalesEl.textContent = sales.join('');
+  salesCountEl.textContent = sales.length;
+}
+
+function updateAchievemnetsDisplayAndCount() {
+  const displayAchievementsEl = document.getElementById('display-achievements');
+  const achievementsCountEl = document.getElementById('achievements-count');
+  displayAchievementsEl.textContent = achievements.join('');
   achievementsCountEl.textContent = achievements.length;
 }
 
-// 4
-function resetAll() {
-  sales = [];
-  achievements = [];
+function updateRevenueAndCommission() {
+  const revenueEl = document.getElementById('total-revenue');
+  const commissionEl = document.getElementById('total-commission');
 
-  salesCountEl.innerText = '';
-  achievementsCountEl.innerText = '';
-
-  displaySales.innerText = '';
-  displayAchievements.innerText = '';
-
-  totalRevenueEl.innerText = '';
-  totalCommisionEl.innerText = '';
-
-  totalRevenue = 0;
-  totalCommision = 0;
-}
-
-// LIGHT MODE TOGGLE SWITCH
-const toggleSwitchEl = document.getElementById('toggle-switch');
-const mainElement = document.querySelector('main');
-
-toggleSwitchEl.addEventListener('change', function (e) {
-  if (e.target.checked) {
-    enableLightMode();
-  } else {
-    enableDarkMode();
-  }
-});
-
-function enableLightMode() {
-  mainElement.classList.add('light-mode');
-}
-
-function enableDarkMode() {
-  mainElement.classList.remove('light-mode');
+  revenueEl.textContent = `$${revenue}`;
+  commissionEl.textContent = `$${commission}`;
 }
