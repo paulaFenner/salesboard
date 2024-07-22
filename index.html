@@ -11,47 +11,55 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <main>
-      <label class="switch" for="toggle-switch">
-        <input type="checkbox" id="toggle-switch" />
-        <span class="slider round"></span>
-      </label>
-      <section class="header-container">
-        <h1>Salesboard 🔔</h1>
-        <img class="profile-picture" src="/assets/Ollie.png" alt="portrait of a person with short blue hair, wearing a black top" />
-      </section>
+    <div class="wrapper">
+      <header>
+        <label class="switch" for="toggle-switch">
+          <input type="checkbox" id="toggle-switch" />
+          <span class="slider round"></span>
+        </label>
+        <section class="header-container">
+          <h1>Salesboard 🔔</h1>
+          <img
+            class="profile-picture"
+            src="/assets/Ollie.png"
+            alt="portrait of a person with short blue hair, wearing a black top"
+          />
+        </section>
+      </header>
 
-      <section class="products-container">
-        <button id="product-a-btn">⭐</button>
-        <button id="product-b-btn">🔥</button>
-      </section>
+      <main>
+        <section class="products-container">
+          <button class="product" id="prod-a">⭐</button>
+          <button class="product" id="prod-b">🔥</button>
+        </section>
 
-      <section class="statistics-container">
-        <div>
-          <h2>Live Sales - <span id="sales-count"></span></h2>
-          <div class="display big-display" id="display-sales"></div>
-        </div>
-        <div>
-          <h2>Live Achievements - <span id="achievements-count"></span></h2>
-          <div class="display big-display" id="display-achievements"></div>
-        </div>
-      </section>
+        <section class="statistics-container">
+          <div>
+            <h2>Live Sales - <span id="sales-count"></span></h2>
+            <div class="display big-display" id="display-sales"></div>
+          </div>
+          <div>
+            <h2>Live Achievements - <span id="achievements-count"></span></h2>
+            <div class="display big-display" id="display-achievements"></div>
+          </div>
+        </section>
 
-      <section class="totals-container">
-        <div>
-          <h2>Total Revenue</h2>
-          <div class="display small-display" id="total-revenue"></div>
-        </div>
-        <div>
-          <h2>Total Commision</h2>
-          <div class="display small-display" id="total-commision"></div>
-        </div>
-      </section>
+        <section class="totals-container">
+          <div>
+            <h2>Total Revenue</h2>
+            <div class="display small-display" id="total-revenue"></div>
+          </div>
+          <div>
+            <h2>Total Commission</h2>
+            <div class="display small-display" id="total-commission"></div>
+          </div>
+        </section>
 
-      <section class="reset-container">
-        <button class="reset-btn" id="reset-btn">RESET</button>
-      </section>
-    </main>
-    <script src="script.js"></script>
+        <section class="reset-container">
+          <button class="reset-btn" id="reset-btn">RESET</button>
+        </section>
+      </main>
+    </div>
+    <script src="script.js" type="module"></script>
   </body>
 </html>
